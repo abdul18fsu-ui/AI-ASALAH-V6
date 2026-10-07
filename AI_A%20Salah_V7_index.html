@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI A.Salah</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#111}
+.app{max-width:700px;margin:auto;min-height:100vh;background:white;display:flex;flex-direction:column}
+header{background:#0757d9;color:white;padding:18px;text-align:center}header h1{margin:0}
+header p{margin:5px 0}.chat{flex:1;padding:16px;overflow-y:auto}
+.msg{max-width:85%;padding:12px 14px;border-radius:16px;margin:10px 0;line-height:1.45;white-space:pre-wrap}
+.bot{background:#eaf1ff;margin-right:auto}.user{background:#0757d9;color:white;margin-left:auto}
+.quick{display:flex;gap:8px;overflow-x:auto;padding:8px 12px}.quick button{border:1px solid #d5ddec;background:white;border-radius:18px;padding:8px 12px;white-space:nowrap}
+form{display:flex;gap:8px;padding:12px;border-top:1px solid #ddd}input{flex:1;padding:13px;border:1px solid #ccd4e0;border-radius:24px;font-size:16px}
+button.send{background:#0757d9;color:white;border:0;border-radius:24px;padding:0 18px;font-weight:bold}
+.tools{display:flex;justify-content:space-between;padding:5px 12px 12px}.tools button{border:0;background:none;color:#0757d9}
+</style>
+</head>
+<body>
+<div class="app">
+<header><h1>🤖 AI A.Salah</h1><p>Your Personal Intelligence (PI)</p><div>● Online — Free Demo Mode</div></header>
+<div id="chat" class="chat"></div>
+<div class="quick">
+<button onclick="quick('Hello AI A.Salah')">Hello</button>
+<button onclick="quick('Teach me coding')">Coding</button>
+<button onclick="quick('Give me motivation')">Motivation</button>
+<button onclick="quick('Tell me about AI')">AI</button>
+</div>
+<div class="tools"><button onclick="clearChat()">Clear chat</button><button onclick="saveChat()">Save chat</button></div>
+<form onsubmit="sendMessage(event)"><input id="input" placeholder="Message AI A.Salah..." autocomplete="off"><button class="send" type="submit">Send</button></form>
+</div>
+<script>
+const chat=document.getElementById("chat"),input=document.getElementById("input");
+function addMessage(text,type){const d=document.createElement("div");d.className="msg "+type;d.textContent=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+function reply(x){const m=x.toLowerCase();
+if(m.includes("hello")||m.includes("hi")||m.includes("sup"))return "Hello boss! 👋 I am AI A.Salah, your Personal Intelligence. How can I help you today?";
+if(m.includes("coding")||m.includes("code"))return "Let's learn coding step by step. HTML creates structure, CSS designs it, and JavaScript makes it interactive.";
+if(m.includes("motivat"))return "Keep going, boss. Small progress every day can become something very big. Never give up. 💙";
+if(m.includes("ai"))return "AI means Artificial Intelligence. AI A.Salah is your own Personal Intelligence project.";
+if(m.includes("who are you"))return "I am AI A.Salah V7 — a free web version of your Personal Intelligence project.";
+return "I received your message: ""+x+"". I am currently in Free Demo Mode. The next stage is connecting me to a real AI backend.";
+}
+function sendMessage(e){e.preventDefault();let x=input.value.trim();if(!x)return;addMessage(x,"user");input.value="";setTimeout(()=>addMessage(reply(x),"bot"),300);}
+function quick(x){input.value=x;input.focus();}
+function clearChat(){chat.innerHTML="";localStorage.removeItem("aiAsalahChat");welcome();}
+function saveChat(){localStorage.setItem("aiAsalahChat",chat.innerHTML);alert("Chat saved on this phone.");}
+function welcome(){addMessage("Assalamu alaikum! 👋\nI am AI A.Salah.\n\nYour Personal Intelligence is online in Free Demo Mode. Ask me anything about the features you want to build.","bot");}
+const saved=localStorage.getItem("aiAsalahChat");if(saved)chat.innerHTML=saved;else welcome();
+</script>
+</body>
+</html>
